@@ -15,7 +15,7 @@ const posts = (await getCollection("blog")).sort(
 				{
 					posts.map((post) => (
 						// le mandamos todas sus props de post.data
-						<Article {...post.data} />
+						<Article {...post.data} slug={post.slug} />
 					))
 				}
 			</ul>

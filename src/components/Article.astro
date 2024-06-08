@@ -3,8 +3,8 @@ import { type CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 
 // forma 1: con type y desestructuracion
-type Props = CollectionEntry<'blog'>['data']
-const { heroImage, pubDate, tags, title} = Astro.props;
+type Props = CollectionEntry<'blog'>['data'] & { slug: string };
+const { heroImage, pubDate, tags, title, slug} = Astro.props;
 
 // forma 2: con interface
 // interface Props { post : CollectionEntry<'blog'>['data'] }
@@ -15,7 +15,7 @@ const { heroImage, pubDate, tags, title} = Astro.props;
 <li class="border-extra-soft-white text-soft-white hover:bg-soft-light rounded-xl border transition-colors duration-200">
   <div>
     <article>
-      <a>
+      <a href={`blog/${slug}`}>
         <img
           src={heroImage}
           alt=""
