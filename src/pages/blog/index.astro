@@ -1,24 +1,19 @@
 ---
 import Article from "@/components/Article.astro";
-import MainLayout from "@/layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
+import ArticleList from "@/layouts/ArticleList.astro";
+
 // posts ordenados por fecha de forma descendente
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<MainLayout title="Blog">
-	<div class="max-w-content-size mx-auto w-full">
-		<section class="mt-6 w-full">
-			<ul class="space-y-8">
-				{
-					posts.map((post) => (
-						// le mandamos todas sus props de post.data
-						<Article {...post.data} slug={post.slug} />
-					))
-				}
-			</ul>
-		</section>
-	</div>
-</MainLayout>
+<ArticleList>
+	{
+		posts.map((post) => (
+			// le mandamos todas sus props de post.data
+			<Article {...post.data} slug={post.slug} />
+		))
+	}
+</ArticleList>
